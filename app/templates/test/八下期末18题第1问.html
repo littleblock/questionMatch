@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>学生路径</title>
+</head>
+<body>
+<!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+<div id="main" style="width: 1200;height:600px;"></div>
+
+<script src="{{ url_for('static', filename='js/echarts.min.js') }}"></script>
+<script type="text/javascript">
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('main'));
+        // flask传参转义
+        var echart_data = {{ data|tojson }}
+        var option = {
+            parallelAxis: [
+                {dim: 0, name: '阶段一',
+                    type: 'category',
+                    data: [15, 'R', 4, 19, 21]},
+                {dim: 1, name: '阶段二',
+                    type: 'category',
+                    data: ['R', 5, 6, 0]},
+                {dim: 2, name: '阶段三',
+                    type: 'category',
+                    data: ['R', 15, 6, 10, 0]},
+                {dim: 3, name: '阶段四',
+                    type: 'category',
+                    data: [15, 4, 6, 9, 0, 17]}
+            ],
+            parallel: {
+                left: '5%',
+                right: '13%',
+                bottom: '10%',
+                top: '20%',
+                parallelAxisDefault: {
+                    type: 'value',
+                    nameLocation: 'end',
+                    nameGap: 20
+                }
+            },
+            series: {
+                name: '学生',
+                type: 'parallel',
+                lineStyle: {
+                    color: '#000000',
+                    width: 4,
+                    opacity: 0.02,
+                },
+                data: echart_data
+            }
+        };
+
+         // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+
+
+
+
+</script>
+<script>
+    $(document).ready(function () {
+        $("#c1").addClass("active");
+    });
+
+
+</script>
+</body>
+</html>

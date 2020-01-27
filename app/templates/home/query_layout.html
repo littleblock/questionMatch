@@ -1,0 +1,42 @@
+<!--
+Author: qixuanye
+Time: 2019/12/09
+-->
+
+<!doctype html>
+
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- 链接bootstrap的css文件-->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename = 'css/bootstrap.min.css')}}">
+    <title>鲁班智能答疑系统</title>
+    {% block css %}{% endblock %}
+    <style>
+        #clear{background-color: rgba(255, 255, 255, 0) !important;box-shadow: none;border:none;}
+    </style>
+</head>
+
+<body background="{{ url_for('static', filename = 'image/7责任理念.jpg')}}" style=" background-repeat:no-repeat ;
+background-size:100% 100%;
+background-attachment: fixed;">
+
+<div class="col-md-8 offset-md-2"  style="margin-top:90px">
+    <div class="card" id="clear">
+        <div class="card-header">{{ title }}</div>
+        <div class="card-body">
+            {% block content%}{% endblock %}
+        </div>
+    </div>
+</div>
+<!-- jQuery (Bootstrap 的所有 JavaScript 插件都依赖 jQuery，所以必须放在前边) -->
+<script src="{{ url_for('static', filename='js/jquery.slim.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/popper.min.js') }}"></script>
+<!-- 加载 Bootstrap 的所有 JavaScript 插件。你也可以根据需要只加载单个插件。 -->
+<script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+{% block js %}{% endblock %}
+</body>
+</html>

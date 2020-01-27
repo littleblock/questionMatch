@@ -1,0 +1,65 @@
+<!--
+Author: qixuanye
+Time: 2019/12/13
+-->
+{% extends "admin/layout.html"%}
+{% block content%}
+<!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+<div id="main" style="width: 800px;height:400px;"></div>
+{% endblock %}
+
+{% block js %}
+<script src="{{ url_for('static', filename='js/echarts.min.js') }}"></script>
+<script type="text/javascript">
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('main'));
+        // var js_object = eval('{{chart_datas|safe}}');
+        var js_object = {{ chart_datas|tojson }}
+        // 为了获取json的值，注意这种写法
+        var data = eval("("+js_object+")")
+        console.log(js_object)
+        // 指定图表的配置项和数据
+        var option = {
+            title: {
+                text: '功能点访问统计'
+            },
+            tooltip: {},
+            legend: {
+                data:['访问次数']
+            },
+            xAxis: {
+                data: data.name
+            },
+            yAxis: {},
+            series: [{
+                name: '访问次数',
+                type: 'bar',
+                data: data.value,
+                itemStyle: {
+							normal: {
+								label: {
+									show: true, //开启显示
+									position: 'top', //在上方显示
+									textStyle: { //数值样式
+										color: 'black',
+										fontSize: 16
+									}
+								}
+							}
+						},
+            }]
+        };
+
+ // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+
+
+</script>
+<script>
+    $(document).ready(function () {
+        $("#c1").addClass("active");
+    });
+
+
+</script>
+{% endblock %}

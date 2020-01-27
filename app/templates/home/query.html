@@ -1,0 +1,38 @@
+<!--
+Author: qixuanye
+Time: 2019/12/09
+-->
+{% extends "home/query_layout.html" %}
+{% block css %}
+<style>
+    .boxClear{background-color: rgba(255, 255, 255, 0.95) !important;box-shadow: none;border:none;}
+</style>
+{% endblock %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-12" style="margin-top: 30px;">
+            <h2 class="text-center"><strong>鲁班智能答疑系统</strong></h2>
+            <form method="post" enctype="multipart/form-data" style="margin-top: 30px" class="col-md-8 offset-md-2">
+                <div class="form-group">
+                    <label><strong>功能点分类</strong></label>
+                    {{ form.function_type }}
+                    {% for v in form.function_type.errors %}
+                    <p style="color: red">{{ v }}</p>
+                    {% endfor %}
+                </div>
+                <div class="form-group">
+                    <label><strong>查询问题内容</strong></label>
+                    <br>
+                    {{ form.content }}
+                    {% for v in form.content.errors %}
+                    <p style="color: red">{{ v }}</p>
+                    {% endfor %}
+                </div>
+                {{ form.submit }}
+                {{ form.csrf_token }}
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

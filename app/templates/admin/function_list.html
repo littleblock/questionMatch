@@ -1,0 +1,66 @@
+<!--
+Author: qixuanye
+Time: 2019/11/14
+-->
+
+{% extends "admin/layout.html"%}
+{% import "admin/page.html" as pg %}
+{% block css %}
+<style>
+    .table td, .table th{
+        vertical-align: middle;
+    }
+</style>
+{% endblock %}
+
+{% block content%}
+<!-- 实现鼠标放在某一表格上，表格未显示完全的内容会自动浮现出来的效果-->
+<script type="text/javascript">
+    function removeClassType($this) {
+        $($this).attr("title",$this.innerText);
+    }
+</script>
+
+<!-- 固定表格宽度，多余内容以省略号表示，不允许换行-->
+<style>
+    table { table-layout:fixed;}
+    .award-name{-o-text-overflow:ellipsis;text-overflow:ellipsis;overflow:hidden;white-space:nowrap;
+</style>
+<table class="table table-bordered">
+    <thead>
+    <tr style="able-layout:fixed">
+        <th>功能点代码</th>
+        <th>功能点名称</th>
+        <th>发布人</th>
+        <th>发布时间</th>
+        <th>操作管理</th>
+    </tr>
+    </thead>
+    {% for v in page_data.items %}
+    <tr style="font-size:12px">
+        <td class="award-name" onmousemove="removeClassType(this)"><strong>{{ v.func_code }}</strong></td>
+        <td class="award-name" onmousemove="removeClassType(this)"><strong>{{ v.func_name }}</strong></td>
+        <td class="award-name" onmousemove="removeClassType(this)"><strong>{{ v.last_modify_user }}</strong></td>
+        <td class="award-name" onmousemove="removeClassType(this)"><strong>{{ v.last_modify_time }}</strong></td>
+        <td>
+            <!--
+            <button class="btn btn-sm btn-outline-warning" style="font-size:12px">编辑</button>
+            -->
+            <a href="{{ url_for('admin.function_del', id = v.func_id) }}" class="btn btn-sm btn-outline-warning">删除</a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+<!-- 分页-->
+<!-- 分页-->
+{{ pg.page(page_data, 'admin.function_list') }}
+{% endblock %}
+
+{% block js %}
+<script>
+    $(document).ready(function () {
+        $("#f2").addClass("active");
+    });
+
+</script>
+{% endblock %}

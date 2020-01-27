@@ -1,0 +1,33 @@
+<!--
+Author: qixuanye
+Time: 2019/11/14
+-->
+{% extends "admin/user.html" %}
+{% block content %}
+<form method="post">
+    <!--
+    {% for msg in  get_flashed_messages(category_filter=['err']) %}
+    <p style="color: red">{{ msg }}</p>
+    {% endfor %}
+    -->
+    <div class="form-group">
+        <label><strong>账号</strong></label>
+        {{ form.name }}
+        {% for v in form.name.errors %}
+        <p style="color: red">{{ v }}</p>
+        {% endfor %}
+    </div>
+    <div class="form-group">
+        <label><strong>密码</strong></label>
+        {{ form.pwd }}
+        {% for v in form.pwd.errors %}
+        <p style="color: red">{{ v }}</p>
+        {% endfor %}
+    </div>
+    <div style="text-align:center">
+        {{ form.submit }}
+        {{ form.csrf_token }}
+    </div>
+
+</form>
+{% endblock %}

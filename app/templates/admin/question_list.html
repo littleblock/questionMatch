@@ -1,0 +1,70 @@
+<!--
+Author: qixuanye
+Time: 2019/11/14
+-->
+{% extends "admin/layout.html"%}
+{% import "admin/page.html" as pg %}
+{% block css %}
+<style>
+    .table td, .table th{
+        vertical-align: middle;
+    }
+
+</style>
+{% endblock %}
+{% block content%}
+<script type="text/javascript">
+    function removeClassType($this) {
+        $($this).attr("title",$this.innerText);
+    }
+
+</script>
+<style>
+    table { table-layout:fixed;}
+    .award-name{-o-text-overflow:ellipsis;text-overflow:ellipsis;overflow:hidden;white-space:nowrap;}
+</style>
+<table class="table table-bordered">
+    <thead>
+    <tr style="able-layout:fixed">
+        <th style="width: 30%">问题标题</th>
+        <th style="width: 12%">功能点分类</th>
+        <th style="width: 15%">关键字</th>
+        <th style="width: 8%">发布人</th>
+        <th style="width: 15%">发布时间</th>
+        <th style="width: 15%">操作管理</th>
+    </tr>
+    </thead>
+    {% for v in page_data.items %}
+    <tr style="font-size:12px">
+        <td class="award-name" onmousemove="removeClassType(this)"><strong>{{ v.ques_title }}</strong></td>
+        <td class="award-name" onmousemove="removeClassType(this)"><strong>{{ v.func_ques_relations.0.func_name }}</strong></td>
+        <td class="award-name" onmousemove="removeClassType(this)">
+            {% for x in v.keyword_buses %}
+                {% if x.is_del %}
+                {% else %}
+                    <strong>{{ x.keyword_bus_name }}</strong>;
+                {% endif %}
+            {% endfor %}
+
+        </td>
+        <td class="award-name" onmousemove="removeClassType(this)"><strong>{{ v.last_modify_user }}</strong></td>
+        <td class="award-name" onmousemove="removeClassType(this)"><strong>{{ v.last_modify_time }}</strong></td>
+        <td>
+            <a href="{{ url_for('admin.question_edit', id = v.ques_id) }}" class="btn btn-sm btn-outline-warning">编辑</a>
+            <a href="{{ url_for('admin.question_del', id = v.ques_id) }}" class="btn btn-sm btn-outline-warning">删除</a>
+
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+<!-- 分页-->
+{{ pg.page(page_data, 'admin.question_list') }}
+{% endblock %}
+
+{% block js %}
+<script>
+    $(document).ready(function () {
+        $("#m2").addClass("active");
+    });
+</script>
+{% endblock %}

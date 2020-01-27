@@ -1,0 +1,80 @@
+<!--
+Author: qixuanye
+Time: 2019/11/14
+-->
+{% extends "admin/layout.html" %}
+{% block css %}
+<!-- Latest compiled and minified CSS -->
+<!--
+<link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/css/bootstrap-select.min.css">
+-->
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename = 'css/bootstrap-select.min.css')}}">
+<!-- Latest compiled and minified JavaScript -->
+<!--
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/js/bootstrap-select.min.js"></script>
+-->
+<script type="text/javascript" charset="UTF-8"
+        src="{{ url_for('static', filename = 'js/bootstrap-select.min.js') }}"></script>
+<script type="text/javascript" charset="UTF-8"
+        src="{{ url_for('static', filename = 'ue/ueditor.config.js') }}"></script>
+<script type="text/javascript" charset="UTF-8" src="{{ url_for('static', filename = 'ue/ueditor.all.js') }}"></script>
+<script type="text/javascript" charset="UTF-8"
+        src="{{ url_for('static', filename = 'ue/lang/zh-cn/zh-cn.js') }}"></script>
+{% endblock %}
+{% block content %}
+<form method="post" enctype="multipart/form-data">
+    <div class="form-group">
+        <label>问题标题</label>
+        <input type="hidden" name="id" value={{ question_data.ques_id }}>
+        {{ form.title(value = question_data.ques_title) }}
+        {% for v in form.title.errors %}
+        <p style="color: red">{{ v }}</p>
+        {% endfor %}
+    </div>
+    <div class="form-group">
+        <label>功能点分类</label>
+        {{ form.function_type }}
+        {% for v in form.function_type.errors %}
+        <p style="color: red">{{ v }}</p>
+        {% endfor %}
+    </div>
+    <!--
+    <div class="form-group">
+        <label>文本关键字</label>
+        {{ form.test_keyword }}
+    </div>
+    -->
+    <div class="form-group">
+        <label>业务关键字（请用';'分隔）</label>
+        {{ form.bus_keyword }}
+        {% for v in form.bus_keyword.errors %}
+        <p style="color: red">{{ v }}</p>
+        {% endfor %}
+    </div>
+    <div class="form-group">
+        <label>回答内容</label>
+        {{ form.content }}
+        {% for v in form.content.errors %}
+        <p style="color: red">{{ v }}</p>
+        {% endfor %}
+    </div>
+    <!--
+    <div class="form-group">
+        <label>附录图片</label>
+        <img data-src="holder.js/300x160" style="margin-top: 12px">
+    </div>
+    -->
+    {{ form.submit }}
+    {{ form.csrf_token }}
+</form>
+{% endblock %}
+
+{% block js %}
+<script>
+    var ue = UE.getEditor("content");
+    $(document).ready(function () {
+        $("#m1").addClass("active");
+    });
+</script>
+{% endblock %}

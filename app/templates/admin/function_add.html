@@ -1,0 +1,31 @@
+<!--
+Author: qixuanye
+Time: 2019/11/14
+-->
+{% extends "admin/layout.html" %}
+
+{% block content %}
+<form method="post">
+    <div class="form-group">
+        <label>功能点代码</label>
+        {{ form.code }}
+
+    </div>
+    <div class="form-group">
+        <label>功能点名称</label>
+        {{ form.name }}
+
+    </div>
+    {{ form.submit }}
+    {{ form.csrf_token }}
+</form>
+{% endblock %}
+
+{% block js %}
+<script>
+    $(document).ready(function () {
+        $("#f1").addClass("active");
+    });
+
+</script>
+{% endblock %}

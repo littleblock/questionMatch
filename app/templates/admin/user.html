@@ -1,0 +1,50 @@
+<!--
+Author: qixuanye
+Time: 2019/11/14
+-->
+<!doctype html>
+
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- 链接bootstrap的css文件-->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename = 'css/bootstrap.min.css')}}">
+    <title>{{ title }}</title>
+    <style>
+        .clear{background-color: rgba(255, 255, 255, 0.2) !important;box-shadow: none;border:none;}
+        .textClear{background-color: rgba(255, 255, 255, 0.9) !important;box-shadow: none;border:none;}
+    </style>
+
+</head>
+<body background="{{ url_for('static', filename = 'image/11廉洁理念1.jpg')}}" style=" background-repeat:no-repeat ;
+background-size:100% 100%;
+background-attachment: fixed;">
+<div class="container">
+    <div class="row">
+        <div class="col-md-12" style="margin-top: 120px;">
+            <h3 class="text-center"><strong>鲁班平台自诊断及用户智能答疑系统</strong></h3>
+        </div>
+        <div class="col-md-6 offset-md-3" style="margin-top: 40px">
+            <div class="card clear">
+                <div class="card-header" align="center">
+                    <strong>{{ title }}</strong>
+                </div>
+                <div class="card-body">
+                    {% block content %} {% endblock %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- jQuery (Bootstrap 的所有 JavaScript 插件都依赖 jQuery，所以必须放在前边) -->
+<script src="{{ url_for('static', filename='js/jquery.slim.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/popper.min.js') }}"></script>
+<!-- 加载 Bootstrap 的所有 JavaScript 插件。你也可以根据需要只加载单个插件。 -->
+<script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+</body>
+</html>
